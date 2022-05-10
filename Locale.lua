@@ -433,6 +433,8 @@ rumors.enUS = {
 rumors.enGB = rumors.enUS
 
 clues.zhCN = {
+	male = MALE,
+	female = FEMALE,
 	lightVest = "浅色上衣",
 	darkVest = "深色上衣",
 	shortSleeves = "短袖",
