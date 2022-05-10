@@ -23,7 +23,7 @@ local affixSchedule = {
 }
 
 local scheduleEnabled = true
-local affixScheduleUnknown = false
+local affixScheduleUnknown = not next(affixSchedule) -- unknown affix if empty schedule
 local currentWeek
 local currentKeystoneMapID
 local currentKeystoneLevel
@@ -33,7 +33,7 @@ local function GetNameForKeystone(keystoneMapID, keystoneLevel)
 	local keystoneMapName = keystoneMapID and C_ChallengeMode.GetMapUIInfo(keystoneMapID)
 	if keystoneMapID and keystoneMapName then
 		keystoneMapName = gsub(keystoneMapName, ".-%-", "") -- Mechagon
-		keystoneMapName = gsub(keystoneMapName, ".-"..HEADER_COLON, "") -- Tazavesh
+		keystoneMapName = gsub(keystoneMapName, ".-"..HEADER_COLON, "") -- Tezavesh
 		return string.format("%s (%d)", keystoneMapName, keystoneLevel)
 	end
 end
@@ -47,7 +47,7 @@ local function UpdatePartyKeystones()
 	if not scheduleEnabled then return end
 	if not IsAddOnLoaded("Blizzard_ChallengesUI") then return end
 
-	local playerRealm = select(2, UnitFullName("player")) or ""
+	local playerRealm = GetRealmName()
 
 	local e = 1
 	for i = 1, 4 do
@@ -98,7 +98,7 @@ end
 
 local function UpdateFrame()
 	if not scheduleEnabled then return end
-	
+
 	Mod:CheckAffixes()
 	Mod.AffixFrame:Show()
 	Mod.PartyFrame:Show()
@@ -166,7 +166,7 @@ end
 
 function Mod:Blizzard_ChallengesUI()
 	if not scheduleEnabled then return end
-	
+
 	local frame = CreateFrame("Frame", nil, ChallengesFrame)
 	frame:SetSize(246, 92)
 	frame:SetPoint("TOPLEFT", ChallengesFrame.WeeklyInfo.Child.WeeklyChest, "TOPRIGHT", -20, 30)
@@ -434,7 +434,7 @@ end
 
 function Mod:Startup()
 	scheduleEnabled = Addon.Config.schedule
-	
+
 	self:RegisterAddOnLoaded("Blizzard_ChallengesUI")
 	self:RegisterEvent("GROUP_ROSTER_UPDATE", "SetPartyKeystoneRequest")
 	self:RegisterEvent("BAG_UPDATE")
