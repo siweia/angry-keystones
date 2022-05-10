@@ -83,11 +83,11 @@ local function UpdatePartyKeystones()
 	end
 	if e == 1 then
 		Mod.AffixFrame:ClearAllPoints()
-		Mod.AffixFrame:SetPoint("LEFT", ChallengesFrame.WeeklyInfo.Child.WeeklyChest, "RIGHT", 130, 0)
+		Mod.AffixFrame:SetPoint("LEFT", ChallengesFrame.WeeklyInfo.Child.WeeklyChest, "RIGHT", 130, -25)
 		Mod.PartyFrame:Hide()
 	else
 		Mod.AffixFrame:ClearAllPoints()
-		Mod.AffixFrame:SetPoint("TOPLEFT", ChallengesFrame.WeeklyInfo.Child.WeeklyChest, "TOPRIGHT", 130, 55)
+		Mod.AffixFrame:SetPoint("TOPLEFT", ChallengesFrame.WeeklyInfo.Child.WeeklyChest, "TOPRIGHT", 130, 40)
 		Mod.PartyFrame:Show()
 	end
 	while e <= 4 do
@@ -106,7 +106,7 @@ local function UpdateFrame()
 
 	local weeklyChest = ChallengesFrame.WeeklyInfo.Child.WeeklyChest
 	weeklyChest:ClearAllPoints()
-	weeklyChest:SetPoint("LEFT", 100, -30)
+	weeklyChest:SetPoint("LEFT", 105, -5)
 
 	local description = ChallengesFrame.WeeklyInfo.Child.Description
 	description:SetWidth(240)
@@ -169,7 +169,7 @@ function Mod:Blizzard_ChallengesUI()
 
 	local frame = CreateFrame("Frame", nil, ChallengesFrame)
 	frame:SetSize(246, 92)
-	frame:SetPoint("TOPLEFT", ChallengesFrame.WeeklyInfo.Child.WeeklyChest, "TOPRIGHT", -20, 30)
+	frame:SetPoint("TOPLEFT", ChallengesFrame.WeeklyInfo.Child.WeeklyChest, "TOPRIGHT", 30, 30)
 	Mod.AffixFrame = frame
 
 	local bg = frame:CreateTexture(nil, "BACKGROUND")
@@ -285,7 +285,7 @@ function Mod:Blizzard_ChallengesUI()
 
 	local keystoneText = ChallengesFrame.WeeklyInfo.Child:CreateFontString(nil, "ARTWORK", "GameFontNormalMed2")
 	keystoneText:SetPoint("TOP", ChallengesFrame.WeeklyInfo.Child.WeeklyChest, "BOTTOM", 0, -15)
-	keystoneText:SetWidth(320)
+	keystoneText:SetWidth(220)
 	Mod.KeystoneText = keystoneText
 
 	hooksecurefunc("ChallengesFrame_Update", UpdateFrame)
