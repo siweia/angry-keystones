@@ -2,7 +2,7 @@ local ADDON, Addon = ...
 local Mod = Addon:NewModule('Schedule')
 
 local rowCount = 3
-
+local SEASON_AFFIX_ID = 130
 local requestPartyKeystones
 
 -- 1:Overflowing, 2:Skittish, 3:Volcanic, 4:Necrotic, 5:Teeming, 6:Raging, 7:Bolstering, 8:Sanguine, 9:Tyrannical, 10:Fortified, 11:Bursting, 12:Grievous, 13:Explosive, 14:Quaking, 16:Infested, 117: Reaping, 119:Beguiling 120:Awakened, 121:Prideful, 122:Inspiring, 123:Spiteful, 124:Storming
@@ -132,6 +132,8 @@ local function UpdateFrame()
 				local affix = entry.Affixes[j]
 				affix:SetUp(affixes[j])
 			end
+			-- Update season affix
+			entry.Affixes[4]:SetUp(SEASON_AFFIX_ID)
 		end
 		Mod.AffixFrame.Label:Hide()
 	else
@@ -201,7 +203,7 @@ function Mod:Blizzard_ChallengesUI()
 
 		local affixes = {}
 		local prevAffix
-		for j = 3, 1, -1 do
+		for j = 4, 1, -1 do
 			local affix = makeAffix(entry)
 			if prevAffix then
 				affix:SetPoint("RIGHT", prevAffix, "LEFT", -4, 0)
@@ -307,6 +309,9 @@ end
 function Mod:CheckAffixes()
 	currentWeek = nil
 	local currentAffixes = C_MythicPlus.GetCurrentAffixes()
+	if currentAffixes and currentAffixes[4] then
+		SEASON_AFFIX_ID = currentAffixes[4].id
+	end
 
 	if currentAffixes then
 		for index, affixes in ipairs(affixSchedule) do
