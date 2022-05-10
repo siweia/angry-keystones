@@ -230,11 +230,7 @@ function Mod:Blizzard_ChallengesUI()
 	label:SetJustifyV("MIDDLE")
 	label:SetHeight(72)
 	label:SetWordWrap(true)
-	if affixScheduleUnknown then
-		label:SetText(Addon.Locale.scheduleUnknown)
-	else
-		label:SetText(Addon.Locale.scheduleMissingKeystone)
-	end
+	label:SetText(Addon.Locale.scheduleUnknown)
 	frame.Label = label
 
 	local frame2 = CreateFrame("Frame", nil, ChallengesFrame)
